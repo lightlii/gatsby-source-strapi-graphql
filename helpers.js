@@ -89,10 +89,10 @@ const isListType = name => {
 };
 
 const getEntityResponse = name =>
-  name.match(/(.*)(?:EntityResponse)$/)?.[1];
+  name?.match(/(.*)(?:EntityResponse)$/)?.[1];
 
 const getEntityResponseCollection = name =>
-  name.match(/(.*)(?:EntityResponseCollection)$/)?.[1];
+  name?.match(/(.*)(?:EntityResponseCollection)$/)?.[1];
 
 const getCollectionType = name =>
   name.match(/(.*)(?:EntityResponse|RelationResponseCollection)$/)?.[1];
