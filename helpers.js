@@ -32,7 +32,7 @@ const formatCollectionName = name => {
 }
 
 const getFieldType = (type, strapi = false) => {
-  if (type.name === 'DateTime') {
+  if (type.name === 'DateTime' || type.name === 'Date' || type.name === 'Time') {
     return 'Date';
   }
   if (type.name === 'Long') {
@@ -54,7 +54,7 @@ const getFieldType = (type, strapi = false) => {
 }
 
 const getTypeName = type => {
-  if (type.name === 'DateTime') {
+  if (type.name === 'DateTime' || type.name === 'Date' || type.name === 'Time') {
     return 'Date';
   }
   if (type.name === 'Long') {
@@ -89,10 +89,10 @@ const isListType = name => {
 };
 
 const getEntityResponse = name =>
-  name.match(/(.*)(?:EntityResponse)$/)?.[1];
+  name?.match(/(.*)(?:EntityResponse)$/)?.[1];
 
 const getEntityResponseCollection = name =>
-  name.match(/(.*)(?:EntityResponseCollection)$/)?.[1];
+  name?.match(/(.*)(?:EntityResponseCollection)$/)?.[1];
 
 const getCollectionType = name =>
   name.match(/(.*)(?:EntityResponse|RelationResponseCollection)$/)?.[1];
@@ -144,7 +144,7 @@ const extractFiles = (text, apiURL) => {
       }
     } else if (event.entering && node.type === 'html_block' && node.literal) {
       let match
-      const regex = /<img[^>]+src="?([^"\s]+)"?(.*)*\/>/g
+      const regex = /<img[^>]+src="?([^"\s]+)"?\s*/gi
 
       while (match = regex.exec(node.literal)) {
         if (/^\//.test(match[1])) {
