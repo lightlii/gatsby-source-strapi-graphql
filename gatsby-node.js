@@ -102,6 +102,9 @@ exports.sourceNodes = async ({
       })()]);
     } catch (err) {
       catchErrors(err, operation, reporter);
+      if (pluginOptions.abortOnError) {
+        throw err;
+      }
     }
   }));
 
